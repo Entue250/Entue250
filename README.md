@@ -17,7 +17,7 @@
 <div>
   <p>I'm a passionate Full Stack Developer with expertise in building robust and scalable web applications from concept to deployment. My development philosophy centers around creating clean, maintainable code that delivers exceptional user experiences.</p>
   
-  <ul>
+  <ul align="left">
     <li>🔭 Backend Development: Architecting scalable server-side applications and RESTful APIs</li>
     <li>🌟 Frontend Development: Crafting responsive and intuitive user interfaces</li>
     <li>☁️ Cloud Computing: Designing and implementing cloud-native solutions</li>
@@ -151,13 +151,13 @@
 <hr style="width: 100%; border: 1px solid #30363d;">
 
 <div style="padding: 0 20px;">
-  <h3><a href="https://your-website.com" target="_blank">🌐 Personal Website</a></h3>
+  <h3 align="left"><a href="https://your-website.com" target="_blank">🌐 Personal Website</a></h3>
   <p>A custom-built portfolio showcasing my work, skills, and experience with a modern design using React, Next.js, and TailwindCSS.</p>
 
-  <h3><a href="https://github.com/Entue250/ecommerce-platform" target="_blank">🛒 E-commerce Platform</a></h3>
+  <h3 align="left"><a href="https://github.com/Entue250/ecommerce-platform" target="_blank">🛒 E-commerce Platform</a></h3>
   <p>Full-stack online shopping platform with integrated payment gateway, real-time inventory management, and personalized user recommendations.</p>
 
-  <h3><a href="https://github.com/Entue250/issue-tracker" target="_blank">🐞 Issue Tracker App</a></h3>
+  <h3 align="left"><a href="https://github.com/Entue250/issue-tracker" target="_blank">🐞 Issue Tracker App</a></h3>
   <p>Project management tool for tracking bugs and feature requests with customizable workflows, role-based permissions, and detailed analytics.</p>
 
   <h3><a href="https://github.com/Entue250/video-chat-app" target="_blank">📹 Video Chat App</a></h3>
@@ -218,7 +218,7 @@
 <h2 align="center">📚 Currently Learning</h2>
 <hr style="width: 100%; border: 1px solid #30363d;">
 
-<ul>
+<ul align="left">
   <li>🤖 Machine Learning and AI integration in web applications</li>
   <li>🌐 WebAssembly for high-performance web applications</li>
   <li>📱 Progressive Web App (PWA) advanced techniques</li>
@@ -229,7 +229,7 @@
 <h2 align="center">🎯 Fun Facts</h2>
 <hr style="width: 100%; border: 1px solid #30363d;">
 
-<ul>
+<ul align= "left">
   <li>🎸 I play guitar in a weekend band</li>
   <li>🌱 I maintain a small urban garden growing herbs and vegetables</li>
   <li>🏃‍♂️ Completed three half-marathons in the past year</li>
