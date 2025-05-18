@@ -52,7 +52,7 @@
 #         skip_fetch: false
 #         skip_checkout: false
 
-name: Update GitHub Stats (Simple)
+name: Update GitHub Stats
 on:
   schedule:
     - cron: '0 0 * * *'
@@ -71,6 +71,18 @@ jobs:
       with:
         token: ${{ secrets.GH_TOKEN }}
         fetch-depth: 0
+
+    - name: Configure Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Sync with remote
+      run: |
+        echo "🔄 Syncing with remote repository..."
+        git fetch origin
+        git reset --hard origin/main
+        echo "✅ Successfully synced with remote"
 
     - name: Generate Snake Game
       uses: Platane/snk@v3
@@ -109,14 +121,42 @@ jobs:
         echo "🔍 Testing GitHub API access..."
         curl -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
              -H "Accept: application/vnd.github.v3+json" \
-             -s https://api.github.com/user | jq -r '.login + " - Public repos: " + (.public_repos|tostring)'
+             -s https://api.github.com/user | jq -r '.login + " - Public repos: " + (.public_repos|tostring)' || echo "Token check completed"
 
-    - name: Commit and push changes
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: '🔄 Auto-update GitHub stats [skip ci]'
-        commit_user_name: 'github-actions[bot]'
-        commit_user_email: 'github-actions[bot]@users.noreply.github.com'
-        skip_dirty_check: false
-        skip_fetch: false
-        skip_checkout: false
+    - name: Check for changes and commit
+      run: |
+        # Check if there are any changes
+        if git diff --quiet; then
+          echo "No changes detected, skipping commit"
+          exit 0
+        fi
+        
+        # Stage changes
+        git add .
+        
+        # Check again after staging
+        if git diff --cached --quiet; then
+          echo "No staged changes, skipping commit"
+          exit 0
+        fi
+        
+        # Commit changes
+        git commit -m "🔄 Auto-update GitHub stats [skip ci]"
+        
+        # Push changes with retry logic
+        for i in {1..3}; do
+          echo "Attempt $i: Pushing changes..."
+          if git push origin main; then
+            echo "✅ Successfully pushed changes"
+            exit 0
+          else
+            echo "❌ Push failed, syncing and retrying..."
+            git fetch origin
+            git rebase origin/main
+            if [ $i -eq 3 ]; then
+              echo "❌ Failed to push after 3 attempts"
+              exit 1
+            fi
+            sleep 5
+          fi
+        done
