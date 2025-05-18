@@ -34,12 +34,12 @@
   <!-- First row: Two cards side by side -->
   <div style="flex: 1; border: 1px solid #30363d; border-radius: 10px; padding: 15px; margin-bottom: 15px; background-color: #161b22;">
     <!-- Updated with include_all_commits and show_owner parameters for private repos -->
-    <img width="100%" src="https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&show_owner=true&show_icons=true&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&icon_color=58a6ff&ring_color=f75c7e" alt="Entue250's GitHub Stats" />
+    <img width="100%" src="https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&show_owner=true&show_icons=true&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&icon_color=58a6ff&ring_color=f75c7e&cache_bust=1747575459830" alt="Entue250's GitHub Stats" />
   </div>
   
   <div style="flex: 1; border: 1px solid #30363d; border-radius: 10px; padding: 15px; margin-bottom: 15px; background-color: #161b22;">
     <!-- Updated with count_private and include_all_commits for languages (HTML/CSS included) -->
-    <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Entue250&count_private=true&include_all_commits=true&layout=compact&hide_border=true&theme=radical&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9" alt="Most Used Languages" />
+    <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Entue250&count_private=true&include_all_commits=true&layout=compact&hide_border=true&theme=radical&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&cache_bust=1747575459830" alt="Most Used Languages" />
   </div>
 </div>
 
@@ -48,13 +48,13 @@
   <h3 align="center">🏆 GitHub Trophies</h3>
   <div align="center" style="overflow-x: auto;">
     <!-- Original 8 trophies without rank filtering -->
-    <img src="https://github-profile-trophy.vercel.app/?username=Entue250&theme=radical&no-frame=true&no-bg=false&margin-w=4&margin-h=15&column=8&row=1&title=Commits,Repositories,Stars,Followers,Experience,Issues,PullRequest,Reviews" />
+    <img src="https://github-profile-trophy.vercel.app/?username=Entue250&theme=radical&no-frame=true&no-bg=false&margin-w=4&margin-h=15&column=8&row=1&title=Commits,Repositories,Stars,Followers,Experience,Issues,PullRequest,Reviews&cache_bust=1747575459830" />
   </div>
 </div>
 
 <!-- Additional GitHub Streak Stats -->
 <div align="center" style="margin-bottom: 15px;">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Entue250&theme=radical&hide_border=true&background=161b22&stroke=f75c7e&ring=f75c7e&fire=f75c7e&currStreakLabel=f75c7e" alt="GitHub Streak Stats" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Entue250&theme=radical&hide_border=true&background=161b22&stroke=f75c7e&ring=f75c7e&fire=f75c7e&currStreakLabel=f75c7e&cache_bust=1747575459830" alt="GitHub Streak Stats" />
 </div>
 
 <h2 align="center">🛠️ Skills</h2>
@@ -238,7 +238,7 @@
 <div align="center">
   <p><strong>Note:</strong> My GitHub contribution graph includes activity from both public and private repositories, showcasing my consistent development work.</p>
   <!-- Back to original activity graph theme -->
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Entue250&theme=react-dark" width="100%" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Entue250&theme=react-dark&cache_bust=1747575459830" width="100%" />
 </div>
 
 <h2 align="center">🙏 Thank You</h2>
