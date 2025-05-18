@@ -161,14 +161,14 @@
 #           fi
 #         done
 
-name: Update GitHub Stats with Private Repo Fix
+name: Generate Custom Stats from GitHub API
 on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
-  update-readme:
+  generate-custom-stats:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -177,130 +177,126 @@ jobs:
       uses: actions/checkout@v4
       with:
         token: ${{ secrets.GH_TOKEN }}
-        fetch-depth: 0
 
-    - name: Verify GitHub Token Permissions
+    - name: Generate Custom Stats Badge
       run: |
-        echo "🔍 Verifying GitHub token permissions..."
-        
-        # Check user info
-        USER_INFO=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-                         -H "Accept: application/vnd.github.v3+json" \
-                         https://api.github.com/user)
-        
-        echo "User: $(echo $USER_INFO | jq -r '.login')"
-        echo "Public repos: $(echo $USER_INFO | jq -r '.public_repos')"
-        echo "Total private repos: $(echo $USER_INFO | jq -r '.total_private_repos')"
-        
-        # Check private repo access
-        PRIVATE_REPOS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-                             -H "Accept: application/vnd.github.v3+json" \
-                             "https://api.github.com/user/repos?type=private&per_page=5")
-        
-        if [ "$(echo $PRIVATE_REPOS | jq 'length')" -gt 0 ]; then
-          echo "✅ Private repository access confirmed"
-          echo "Private repos found: $(echo $PRIVATE_REPOS | jq -r '.[].name' | head -3 | tr '\n' ' ')"
-        else
-          echo "❌ No private repositories accessible with this token"
-        fi
-
-    - name: Generate Snake Game
-      uses: Platane/snk@v3
-      with:
-        github_user_name: ${{ github.repository_owner }}
-        outputs: |
-          dist/github-contribution-grid-snake.svg
-          dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-        github_token: ${{ secrets.GH_TOKEN }}
-
-    - name: Update README with Alternative Stats Services
-      run: |
-        # Generate new timestamp
-        TIMESTAMP=$(date +%s%3N)
-        echo "Using timestamp: $TIMESTAMP"
-        
-        # Clear multiple stats API caches
-        echo "🔄 Clearing caches for multiple GitHub Stats services..."
-        
-        # Clear original service cache
-        for i in {1..3}; do
-          curl -s "https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&cache_bust=$((TIMESTAMP + i))" > /dev/null &
-        done
-        
-        # Clear alternative service caches
-        curl -s "https://github-readme-stats-sigma-five.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&cache_bust=$TIMESTAMP" > /dev/null &
-        curl -s "https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&cache_bust=$TIMESTAMP" > /dev/null &
-        
-        wait
-        
-        # Update README with multiple service options
-        cat > update_stats.js << 'EOF'
+        cat > generate_stats.js << 'EOF'
+        const https = require('https');
         const fs = require('fs');
-        const timestamp = process.env.TIMESTAMP;
-        
-        let readme = fs.readFileSync('README.md', 'utf8');
-        
-        // Update main GitHub Stats with enhanced URL for private repos
-        readme = readme.replace(
-          /src="https:\/\/github-readme-stats\.vercel\.app\/api\?username=Entue250[^"]*"/g,
-          `src="https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&show_icons=true&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&icon_color=58a6ff&ring_color=f75c7e&show_owner=true&cache_bust=${timestamp}"`
-        );
-        
-        // Update Top Languages
-        readme = readme.replace(
-          /src="https:\/\/github-readme-stats\.vercel\.app\/api\/top-langs\/\?username=Entue250[^"]*"/g,
-          `src="https://github-readme-stats.vercel.app/api/top-langs/?username=Entue250&count_private=true&include_all_commits=true&layout=compact&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&langs_count=10&cache_bust=${timestamp}"`
-        );
-        
-        // Update other stats services
-        readme = readme.replace(/cache_bust=\d+/g, `cache_bust=${timestamp}`);
-        
-        fs.writeFileSync('README.md', readme);
-        console.log('✅ README updated with enhanced private repo parameters');
-        console.log('🔢 Expected total commits: 303 (including private repos)');
-        console.log('⏰ Current showing: Check stats after 30 minutes');
-        EOF
-        
-        node update_stats.js
-      env:
-        TIMESTAMP: ${{ env.TIMESTAMP }}
 
-    - name: Commit and push changes
+        function apiRequest(path) {
+          return new Promise((resolve, reject) => {
+            const options = {
+              hostname: 'api.github.com',
+              path: path,
+              headers: {
+                'Authorization': `token ${process.env.GITHUB_TOKEN}`,
+                'User-Agent': 'GitHub-Stats-Bot',
+                'Accept': 'application/vnd.github.v3+json'
+              }
+            };
+
+            https.get(options, (res) => {
+              let data = '';
+              res.on('data', chunk => data += chunk);
+              res.on('end', () => {
+                if (res.statusCode === 200) {
+                  resolve(JSON.parse(data));
+                } else {
+                  reject(new Error(`API Error: ${res.statusCode}`));
+                }
+              });
+            }).on('error', reject);
+          });
+        }
+
+        async function getCommitStats() {
+          try {
+            // Get user info
+            const user = await apiRequest('/user');
+            console.log(`📊 User: ${user.login}`);
+            console.log(`📁 Public repos: ${user.public_repos}`);
+            console.log(`🔒 Private repos: ${user.total_private_repos}`);
+
+            // Get all repositories (public + private)
+            const repos = await apiRequest('/user/repos?type=all&per_page=100&sort=updated');
+            console.log(`📚 Total accessible repos: ${repos.length}`);
+
+            // Count commits in recent repositories
+            let totalCommits = 0;
+            let reposChecked = 0;
+            const currentYear = new Date().getFullYear();
+
+            for (const repo of repos.slice(0, 30)) { // Check top 30 repos
+              try {
+                const commits = await apiRequest(`/repos/${user.login}/${repo.name}/commits?author=${user.login}&since=${currentYear}-01-01T00:00:00Z&per_page=100`);
+                
+                if (commits && Array.isArray(commits)) {
+                  totalCommits += commits.length;
+                  console.log(`📝 ${repo.name}: ${commits.length} commits (${repo.private ? 'private' : 'public'})`);
+                }
+                reposChecked++;
+                
+                // Rate limiting delay
+                await new Promise(resolve => setTimeout(resolve, 100));
+              } catch (error) {
+                console.log(`⚠️  Skipped ${repo.name}: ${error.message}`);
+              }
+            }
+
+            console.log(`\n🎯 RESULTS:`);
+            console.log(`Total commits in ${currentYear}: ${totalCommits}`);
+            console.log(`Repositories checked: ${reposChecked}/${repos.length}`);
+
+            // Update README with custom stats
+            let readme = fs.readFileSync('README.md', 'utf8');
+            
+            // Generate dynamic stats badge
+            const statsUrl = `https://img.shields.io/badge/Total%20Commits%20${currentYear}-${totalCommits}-brightgreen?style=for-the-badge&logo=github`;
+            
+            // Add or update custom stats section
+            const customStatsSection = `\n<!-- Custom Commit Count -->\n<div align="center">\n  <img src="${statsUrl}" alt="Total Commits ${currentYear}" />\n  <p><em>Includes commits from ${reposChecked} repositories (public + private)</em></p>\n</div>\n<!-- End Custom Stats -->\n`;
+            
+            if (readme.includes('<!-- Custom Commit Count -->')) {
+              readme = readme.replace(/<!-- Custom Commit Count -->[\s\S]*?<!-- End Custom Stats -->/g, customStatsSection.trim());
+            } else {
+              // Add after the GitHub Stats section
+              const statsHeader = '<h2 align="center">📊 GitHub Stats</h2>';
+              if (readme.includes(statsHeader)) {
+                readme = readme.replace(statsHeader, statsHeader + customStatsSection);
+              }
+            }
+
+            // Update regular stats cache
+            const timestamp = Date.now();
+            readme = readme.replace(/cache_bust=\d+/g, `cache_bust=${timestamp}`);
+
+            fs.writeFileSync('README.md', readme);
+            console.log('✅ README updated with custom commit count');
+
+          } catch (error) {
+            console.error('❌ Error generating stats:', error);
+            process.exit(1);
+          }
+        }
+
+        getCommitStats();
+        EOF
+
+        node generate_stats.js
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+    - name: Commit and push
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
         if ! git diff --quiet; then
           git add .
-          git commit -m "🔄 Enhanced GitHub stats for private repos [skip ci]
-
-          - Updated cache-bust timestamp
-          - Enhanced private repository parameters  
-          - Expected: 303 total commits including private repos"
+          git commit -m "📊 Add custom commit statistics including private repos [skip ci]"
           git push
-          echo "✅ Successfully updated GitHub profile"
+          echo "✅ Updated with custom commit statistics"
         else
           echo "No changes to commit"
         fi
-
-    - name: Create Status Report
-      run: |
-        echo "## 📊 Private Repo Stats Update Report" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### ✅ Steps Completed:" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Verified GitHub token has private repo access" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Cleared caches for multiple stats services" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Updated README with enhanced parameters" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Applied fresh cache-busting timestamp" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 🎯 Expected Results:" >> $GITHUB_STEP_SUMMARY
-        echo "- **Total Commits:** 303 (including private repos)" >> $GITHUB_STEP_SUMMARY
-        echo "- **Current Showing:** Check after 30-60 minutes" >> $GITHUB_STEP_SUMMARY
-        echo "- **Private Repos:** Should now be included in count" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### ⏱️ Timeline:" >> $GITHUB_STEP_SUMMARY
-        echo "- **Immediate:** Cache cleared" >> $GITHUB_STEP_SUMMARY
-        echo "- **30 minutes:** Stats may start updating" >> $GITHUB_STEP_SUMMARY
-        echo "- **24 hours:** Full synchronization expected" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "**Last updated:** $(date '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
