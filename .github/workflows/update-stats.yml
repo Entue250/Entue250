@@ -3,7 +3,7 @@ name: Update GitHub Stats
 on:
   schedule:
     # Runs at 12:00 AM UTC every day
-    - cron: '0 0 * * *'  # Fixed: was '0 0 * **' (missing asterisk)
+    - cron: '0 0 * * *'  # Fixed: added missing asterisks
   workflow_dispatch: # Allow manual trigger
   push:
     branches: [ main, master ]
