@@ -96,7 +96,7 @@ on:
   schedule:
     # Runs at 12:00 AM UTC every day
     - cron: '0 0 * * *'
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch: # Allow manual triggers
   push:
     branches: [ main, master ]
 
