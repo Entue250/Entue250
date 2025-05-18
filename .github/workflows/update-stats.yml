@@ -91,7 +91,7 @@
 #         git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update GitHub stats [skip ci]" && git push)
 
 
-name: Update GitHub Stats and Profile
+name: Update GitHub Stats
 on:
   schedule:
     # Runs at 12:00 AM UTC every day
@@ -101,15 +101,16 @@ on:
     branches: [ main, master ]
 
 jobs:
-  update-profile:
+  update-readme:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.GH_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}  # Using built-in token instead of GH_TOKEN
         fetch-depth: 0
 
     - name: Generate Snake Game
@@ -119,32 +120,14 @@ jobs:
         outputs: |
           dist/github-contribution-grid-snake.svg
           dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-        github_token: ${{ secrets.GH_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Using built-in token
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '18'
 
-    - name: Force Clear Stats Cache
-      run: |
-        # Create multiple cache-busting requests to clear API cache
-        current_time=$(date +%s)
-        base_time=$((current_time - 3600))
-        
-        echo "Clearing stats cache with multiple requests..."
-        for i in {1..5}; do
-          cache_key=$((base_time + i))
-          echo "Cache-busting request $i with timestamp: $cache_key"
-          
-          # Make requests to clear cache (they will fail but clear cache)
-          curl -s "https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&cache_bust=$cache_key" > /dev/null || true
-          curl -s "https://github-readme-stats.vercel.app/api/top-langs/?username=Entue250&count_private=true&include_all_commits=true&cache_bust=$cache_key" > /dev/null || true
-          
-          sleep 2
-        done
-
-    - name: Update README with Enhanced Private Repo Stats
+    - name: Update README with Stats
       run: |
         cat > update_readme.js << 'EOF'
         const fs = require('fs');
@@ -152,158 +135,58 @@ jobs:
         // Read current README
         let readme = fs.readFileSync('README.md', 'utf8');
         
-        // Generate timestamp for cache busting
+        // Add cache-busting query parameter to force refresh of stats
         const timestamp = Date.now();
-        console.log('Updating README with timestamp:', timestamp);
         
-        // Enhanced GitHub Stats with stronger private repo parameters
+        // Update GitHub Stats
         readme = readme.replace(
-          /github-readme-stats\.vercel\.app\/api\?username=Entue250[^"]*cache_bust=\d+/g,
-          `github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&show_icons=true&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&icon_color=58a6ff&ring_color=f75c7e&show_owner=true&token=${process.env.GITHUB_TOKEN || ''}&cache_bust=${timestamp}`
+          /github-readme-stats\.vercel\.app\/api\?username=Entue250[^"]*"/g,
+          `github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&show_icons=true&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&icon_color=58a6ff&ring_color=f75c7e&show_owner=true&cache_bust=${timestamp}"`
         );
         
-        // Top Languages (including HTML/CSS now)
+        // Update Top Languages
         readme = readme.replace(
-          /github-readme-stats\.vercel\.app\/api\/top-langs\/\?username=Entue250[^"]*cache_bust=\d+/g,
-          `github-readme-stats.vercel.app/api/top-langs/?username=Entue250&count_private=true&include_all_commits=true&layout=compact&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&langs_count=10&cache_bust=${timestamp}`
+          /github-readme-stats\.vercel\.app\/api\/top-langs\/\?username=Entue250[^"]*"/g,
+          `github-readme-stats.vercel.app/api/top-langs/?username=Entue250&count_private=true&include_all_commits=true&layout=compact&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&langs_count=10&cache_bust=${timestamp}"`
         );
         
-        // GitHub Trophies
+        // Update GitHub Trophies
         readme = readme.replace(
-          /github-profile-trophy\.vercel\.app\/\?username=Entue250[^"]*cache_bust=\d+/g,
-          `github-profile-trophy.vercel.app/?username=Entue250&theme=radical&no-frame=true&no-bg=false&margin-w=4&margin-h=15&column=7&row=2&title=Commit,Followers,Stars,Repositories,Issues,PullRequest,Reviews&cache_bust=${timestamp}`
+          /github-profile-trophy\.vercel\.app\/\?username=Entue250[^"]*"/g,
+          `github-profile-trophy.vercel.app/?username=Entue250&theme=radical&no-frame=true&no-bg=false&margin-w=4&margin-h=15&column=7&row=2&title=Commit,Followers,Stars,Repositories,Issues,PullRequest,Reviews&cache_bust=${timestamp}"`
         );
         
-        // Streak Stats
+        // Update Streak Stats
         readme = readme.replace(
-          /github-readme-streak-stats\.herokuapp\.com\/\?user=Entue250[^"]*cache_bust=\d+/g,
-          `github-readme-streak-stats.herokuapp.com/?user=Entue250&theme=radical&hide_border=true&background=161b22&stroke=f75c7e&ring=f75c7e&fire=f75c7e&currStreakLabel=f75c7e&sideLabels=c9d1d9&currStreakNum=c9d1d9&sideNums=c9d1d9&dates=8b949e&cache_bust=${timestamp}`
+          /github-readme-streak-stats\.herokuapp\.com\/\?user=Entue250[^"]*"/g,
+          `github-readme-streak-stats.herokuapp.com/?user=Entue250&theme=radical&hide_border=true&background=161b22&stroke=f75c7e&ring=f75c7e&fire=f75c7e&currStreakLabel=f75c7e&sideLabels=c9d1d9&currStreakNum=c9d1d9&sideNums=c9d1d9&dates=8b949e&cache_bust=${timestamp}"`
         );
         
-        // Activity Graph
+        // Update Activity Graph
         readme = readme.replace(
-          /github-readme-activity-graph\.vercel\.app\/graph\?username=Entue250[^"]*cache_bust=\d+/g,
-          `github-readme-activity-graph.vercel.app/graph?username=Entue250&theme=react-dark&bg_color=161b22&color=c9d1d9&line=f75c7e&point=58a6ff&area=true&hide_border=true&custom_title=GitHub%20Activity%20Graph&cache_bust=${timestamp}`
-        );
-        
-        // Update last updated timestamp in footer
-        const lastUpdated = new Date().toISOString().split('T')[0];
-        readme = readme.replace(
-          /Last updated: [^|]*/g,
-          `Last updated: ${lastUpdated}`
+          /github-readme-activity-graph\.vercel\.app\/graph\?username=Entue250[^"]*"/g,
+          `github-readme-activity-graph.vercel.app/graph?username=Entue250&theme=react-dark&bg_color=161b22&color=c9d1d9&line=f75c7e&point=58a6ff&area=true&hide_border=true&custom_title=GitHub%20Activity%20Graph&cache_bust=${timestamp}"`
         );
         
         // Write updated README
         fs.writeFileSync('README.md', readme);
-        console.log('✅ README successfully updated!');
-        console.log('✅ Removed Detailed Statistics section');
-        console.log('✅ Included HTML/CSS in Most Used Languages');
-        console.log('✅ Moved Contribution Activity to Coding Activity section');
-        console.log('✅ Removed Private Repository Insights section');
-        console.log('✅ Enhanced private commit tracking with token');
-        console.log('✅ Cache-busting timestamp applied:', timestamp);
+        console.log('README updated successfully with timestamp:', timestamp);
         EOF
         
         node update_readme.js
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-    - name: Test Private Repo Access and Commit Count
-      run: |
-        cat > test_private_access.js << 'EOF'
-        const https = require('https');
-        
-        const options = {
-          hostname: 'api.github.com',
-          path: '/user',
-          method: 'GET',
-          headers: {
-            'Authorization': `token ${process.env.GITHUB_TOKEN}`,
-            'User-Agent': 'GitHub-Profile-Updater',
-            'Accept': 'application/vnd.github.v3+json'
-          }
-        };
-        
-        const req = https.request(options, (res) => {
-          let data = '';
-          res.on('data', (chunk) => data += chunk);
-          res.on('end', () => {
-            if (res.statusCode === 200) {
-              const user = JSON.parse(data);
-              console.log('✅ Private repo access verified');
-              console.log('📊 User info:');
-              console.log(`  - Public repos: ${user.public_repos}`);
-              console.log(`  - Total repos: ${user.total_private_repos + user.public_repos}`);
-              console.log(`  - Private repos: ${user.total_private_repos}`);
-              console.log(`  - Followers: ${user.followers}`);
-              console.log(`  - Following: ${user.following}`);
-              
-              // Test direct stats API
-              console.log('\n🔄 Testing stats API with private repos...');
-              const statsUrl = `https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&show_icons=true`;
-              console.log('Stats URL:', statsUrl);
-            } else {
-              console.log('❌ API access error:', res.statusCode);
-              console.log('Response:', data);
-            }
-          });
-        });
-        
-        req.on('error', (error) => {
-          console.log('❌ Request error:', error.message);
-        });
-        
-        req.end();
-        EOF
-        
-        node test_private_access.js
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-    - name: Commit and push if changed
+    - name: Check for changes and commit
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add .
-        if git diff --quiet && git diff --staged --quiet; then
+        git add -A
+        
+        # Check if there are any changes
+        if git diff --cached --quiet; then
           echo "No changes to commit"
-        else
-          git commit -m "🔄 Simplify profile and fix private repo commit count [skip ci]
-
-          ✨ Changes made:
-          - ❌ Removed Detailed Statistics section
-          - ✅ Included HTML/CSS in Most Used Languages
-          - 📈 Moved GitHub Activity Graph to Coding Activity section
-          - ❌ Removed Private Repository Insights section
-          - 🔧 Enhanced private repository commit tracking
-          - 🔄 Added stronger cache-busting mechanism
-          
-          🎯 Expected fix: Private repo commits should now be included in total count"
-          git push
-          echo "✅ Successfully pushed simplified profile"
+          exit 0
         fi
-
-    - name: Create Summary
-      run: |
-        echo "## 📊 Profile Update Summary" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### ✅ Changes Applied:" >> $GITHUB_STEP_SUMMARY
-        echo "- ❌ **Removed:** Detailed Statistics section" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ **Added:** HTML/CSS to Most Used Languages" >> $GITHUB_STEP_SUMMARY
-        echo "- 📈 **Moved:** Contribution Activity to Coding Activity section" >> $GITHUB_STEP_SUMMARY
-        echo "- ❌ **Removed:** Private Repository Insights section" >> $GITHUB_STEP_SUMMARY
-        echo "- 🔧 **Enhanced:** Private repository commit tracking" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 🎯 Commit Count Fix:" >> $GITHUB_STEP_SUMMARY
-        echo "- Added stronger cache-busting mechanism" >> $GITHUB_STEP_SUMMARY
-        echo "- Enhanced API parameters for private repo inclusion" >> $GITHUB_STEP_SUMMARY
-        echo "- Multiple cache-clearing requests sent" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 📋 What to expect:" >> $GITHUB_STEP_SUMMARY
-        echo "- GitHub Stats should show all 303 commits within 24 hours" >> $GITHUB_STEP_SUMMARY
-        echo "- Most Used Languages will include HTML/CSS" >> $GITHUB_STEP_SUMMARY
-        echo "- GitHub Activity Graph appears in Coding Activity section" >> $GITHUB_STEP_SUMMARY
-        echo "- Cleaner, simplified profile layout" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "**Cache refresh:** $(date '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-        echo "**Next automatic update:** $(date -d '+1 day' '+%Y-%m-%d at 00:00 UTC')" >> $GITHUB_STEP_SUMMARY
+        
+        # Commit and push changes
+        git commit -m "🔄 Auto-update GitHub stats [skip ci]"
+        git push origin HEAD:main
