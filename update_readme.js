@@ -6,13 +6,13 @@ let readme = fs.readFileSync('README.md', 'utf8');
 // Add cache-busting query parameter to force refresh of stats
 const timestamp = Date.now();
 
-// Update GitHub Stats
+// Update GitHub Stats with enhanced parameters for private repos
 readme = readme.replace(
   /github-readme-stats\.vercel\.app\/api\?username=Entue250[^"]*"/g,
   `github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&show_owner=true&show_icons=true&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&icon_color=58a6ff&ring_color=f75c7e&cache_bust=${timestamp}"`
 );
 
-// Update Top Languages
+// Update Top Languages with enhanced parameters
 readme = readme.replace(
   /github-readme-stats\.vercel\.app\/api\/top-langs\/\?username=Entue250[^"]*"/g,
   `github-readme-stats.vercel.app/api/top-langs/?username=Entue250&count_private=true&include_all_commits=true&layout=compact&hide_border=true&theme=radical&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&cache_bust=${timestamp}"`
@@ -27,7 +27,7 @@ readme = readme.replace(
 // Update Streak Stats
 readme = readme.replace(
   /github-readme-streak-stats\.herokuapp\.com\/\?user=Entue250[^"]*"/g,
-  `github-readme-streak-stats.herokuapp.com/?user=Entue250&theme=radical&hide_border=true&background=161b22&stroke=f75c7e&ring=f75c7e&fire=f75c7e&currStreakLabel=f75c7e&cache_bust=${timestamp}"`
+  `github-readme-streak-stats.herokuapp.com/?user=Entue250&theme=radical&hide_border=true&background=161b22&stroke=f75c7e&ring=f75c7e&fire=f75c7e&currStreakLabel=f75c7e&include_all_commits=true&cache_bust=${timestamp}"`
 );
 
 // Update Activity Graph
@@ -39,3 +39,4 @@ readme = readme.replace(
 // Write updated README
 fs.writeFileSync('README.md', readme);
 console.log('README updated successfully with timestamp:', timestamp);
+console.log('Private repository parameters included in stats URLs');
