@@ -33,67 +33,24 @@
 <div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
   <!-- GitHub Stats Card -->
   <div style="flex: 1; min-width: 300px; max-width: 495px;">
-    <img width="100%" src="https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&theme=radical&hide_border=true&cache_bust=1747578381656" alt="Entue250's GitHub Stats" />
+    <img width="100%" src="https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&show_icons=true&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&icon_color=58a6ff&ring_color=f75c7e&show_owner=true&cache_bust=1747575961100" alt="Entue250's GitHub Stats" />
   </div>
   
-  <!-- Top Languages Card -->
+  <!-- Top Languages Card (including HTML/CSS) -->
   <div style="flex: 1; min-width: 300px; max-width: 495px;">
-    <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Entue250&count_private=true&include_all_commits=true&hide=html,css,scss,less,stylus&layout=compact&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&langs_count=10&cache_bust=1747578381656" alt="Most Used Languages" />
+    <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Entue250&count_private=true&include_all_commits=true&layout=compact&theme=radical&hide_border=true&bg_color=161b22&title_color=f75c7e&text_color=c9d1d9&langs_count=10&cache_bust=1747575961100" alt="Most Used Languages" />
   </div>
 </div>
 
 <!-- GitHub Streak Stats -->
 <div align="center" style="margin: 20px 0;">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Entue250&theme=radical&hide_border=true&background=161b22&stroke=f75c7e&ring=f75c7e&fire=f75c7e&currStreakLabel=f75c7e&sideLabels=c9d1d9&currStreakNum=c9d1d9&sideNums=c9d1d9&dates=8b949e&cache_bust=1747578381656" alt="GitHub Streak Stats" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Entue250&theme=radical&hide_border=true&background=161b22&stroke=f75c7e&ring=f75c7e&fire=f75c7e&currStreakLabel=f75c7e&sideLabels=c9d1d9&currStreakNum=c9d1d9&sideNums=c9d1d9&dates=8b949e&cache_bust=1747575961100" alt="GitHub Streak Stats" />
 </div>
 
 <!-- GitHub Trophies -->
 <div align="center" style="margin: 20px 0;">
   <h3 style="color: #f75c7e;">🏆 GitHub Trophies</h3>
-  <img src="https://github-profile-trophy.vercel.app/?username=Entue250&theme=radical&no-frame=true&no-bg=false&margin-w=4&margin-h=15&column=7&row=2&title=Commit,Followers,Stars,Repositories,Issues,PullRequest,Reviews&cache_bust=1747578381656" alt="GitHub Trophies" />
-</div>
-
-<!-- Contribution Graph -->
-<div align="center" style="margin: 20px 0;">
-  <h3 style="color: #f75c7e;">📈 Contribution Activity</h3>
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Entue250&theme=react-dark&bg_color=161b22&color=c9d1d9&line=f75c7e&point=58a6ff&area=true&hide_border=true&custom_title=GitHub%20Activity%20Graph&cache_bust=1747578381656" width="95%" alt="GitHub Activity Graph" />
-</div>
-
-<!-- Detailed Statistics -->
-<div style="margin: 20px 0;">
-  <h3 align="center" style="color: #f75c7e;">📋 Detailed Statistics</h3>
-  <div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-    
-    <!-- Commit Activity -->
-    <div style="background-color: #0f1419; border: 1px solid #30363d; border-radius: 8px; padding: 15px; text-align: center; min-width: 200px;">
-      <h4 style="color: #f75c7e; margin-bottom: 10px;">📝 Total Commits</h4>
-      <img src="https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&theme=radical&hide_border=true&cache_bust=1747578381656" alt="Commit Stats" />
-    </div>
-    
-    <!-- Repository Stats -->
-    <div style="background-color: #0f1419; border: 1px solid #30363d; border-radius: 8px; padding: 15px; text-align: center; min-width: 200px;">
-      <h4 style="color: #f75c7e; margin-bottom: 10px;">📚 Repositories</h4>
-      <img src="https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&theme=radical&hide_border=true&cache_bust=1747578381656" alt="Repository Stats" />
-    </div>
-    
-    <!-- Issue & PR Stats -->
-    <div style="background-color: #0f1419; border: 1px solid #30363d; border-radius: 8px; padding: 15px; text-align: center; min-width: 200px;">
-      <h4 style="color: #f75c7e; margin-bottom: 10px;">🔀 Issues & PRs</h4>
-      <img src="https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&theme=radical&hide_border=true&cache_bust=1747578381656" alt="Issues and PRs" />
-    </div>
-    
-  </div>
-</div>
-
-<!-- Private Repository Insights -->
-<div style="background-color: #0f1419; border: 1px solid #30363d; border-radius: 10px; padding: 20px; margin: 20px 0;">
-  <h3 align="center" style="color: #f75c7e;">🔒 Private Repository Insights</h3>
-  <p align="center" style="color: #8b949e; margin-bottom: 15px;">
-    My development work includes significant contributions to private repositories for client projects, enterprise solutions, and proprietary code.
-  </p>
-  <div align="center">
-    <img src="https://github-readme-stats.vercel.app/api?username=Entue250&count_private=true&include_all_commits=true&theme=radical&hide_border=true&cache_bust=1747578381656" alt="Complete GitHub Activity" width="100%" />
-  </div>
+  <img src="https://github-profile-trophy.vercel.app/?username=Entue250&theme=radical&no-frame=true&no-bg=false&margin-w=4&margin-h=15&column=7&row=2&title=Commit,Followers,Stars,Repositories,Issues,PullRequest,Reviews&cache_bust=1747575961100" alt="GitHub Trophies" />
 </div>
 
 <h2 align="center">🛠️ Skills</h2>
@@ -276,6 +233,8 @@
 
 <div align="center">
   <p><strong>Note:</strong> My GitHub contribution graph includes activity from both public and private repositories, showcasing my consistent development work across all projects.</p>
+  <!-- GitHub Activity Graph -->
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Entue250&theme=react-dark&bg_color=161b22&color=c9d1d9&line=f75c7e&point=58a6ff&area=true&hide_border=true&custom_title=GitHub%20Activity%20Graph&cache_bust=1747575961100" width="95%" alt="GitHub Activity Graph" />
 </div>
 
 <h2 align="center">🙏 Thank You</h2>
@@ -296,7 +255,7 @@
 <!-- Footer with last updated timestamp -->
 <div align="center" style="margin-top: 30px; padding: 20px; border-top: 1px solid #30363d;">
   <p style="font-size: 12px; color: #8b949e;">
-    <em>Last updated: 2025-05-18| Stats refresh daily</em>
+    <em>Last updated: Automatically via GitHub Actions | Stats refresh daily</em>
   </p>
   <p style="font-size: 12px; color: #8b949e;">
     <em>📊 All statistics include contributions from private repositories</em>
