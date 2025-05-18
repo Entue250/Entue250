@@ -152,25 +152,25 @@
 
 <div style="padding: 0 20px;">
   <h3 align="left"><a href="https://your-website.com" target="_blank">🌐 Personal Website</a></h3>
-  <p>A custom-built portfolio showcasing my work, skills, and experience with a modern design using React, Next.js, and TailwindCSS.</p>
+  <p align="left">A custom-built portfolio showcasing my work, skills, and experience with a modern design using React, Next.js, and TailwindCSS.</p>
 
   <h3 align="left"><a href="https://github.com/Entue250/ecommerce-platform" target="_blank">🛒 E-commerce Platform</a></h3>
-  <p>Full-stack online shopping platform with integrated payment gateway, real-time inventory management, and personalized user recommendations.</p>
+  <p align="left">Full-stack online shopping platform with integrated payment gateway, real-time inventory management, and personalized user recommendations.</p>
 
   <h3 align="left"><a href="https://github.com/Entue250/issue-tracker" target="_blank">🐞 Issue Tracker App</a></h3>
-  <p>Project management tool for tracking bugs and feature requests with customizable workflows, role-based permissions, and detailed analytics.</p>
+  <p align="left">Project management tool for tracking bugs and feature requests with customizable workflows, role-based permissions, and detailed analytics.</p>
 
-  <h3><a href="https://github.com/Entue250/video-chat-app" target="_blank">📹 Video Chat App</a></h3>
-  <p>Real-time communication platform with end-to-end encryption, screen sharing capabilities, and virtual background features.</p>
+  <h3 align="left"><a href="https://github.com/Entue250/video-chat-app" target="_blank">📹 Video Chat App</a></h3>
+  <p align="left">Real-time communication platform with end-to-end encryption, screen sharing capabilities, and virtual background features.</p>
 
-  <h3><a href="https://github.com/Entue250/movie-hub" target="_blank">🎬 Movie Hub Platform</a></h3>
-  <p>Interactive streaming service aggregator with personalized recommendations, watchlists, and social sharing features.</p>
+  <h3 align="left"><a href="https://github.com/Entue250/movie-hub" target="_blank">🎬 Movie Hub Platform</a></h3>
+  <p align="left">Interactive streaming service aggregator with personalized recommendations, watchlists, and social sharing features.</p>
 
-  <h3><a href="https://github.com/Entue250/restaurant-app" target="_blank">🍔 Multi-Cart Restaurant App</a></h3>
-  <p>Food ordering system supporting multiple restaurants with real-time order tracking, delivery management, and integrated payment processing.</p>
+  <h3 align="left"><a href="https://github.com/Entue250/restaurant-app" target="_blank">🍔 Multi-Cart Restaurant App</a></h3>
+  <p align="left">Food ordering system supporting multiple restaurants with real-time order tracking, delivery management, and integrated payment processing.</p>
 
-  <h3><a href="https://github.com/Entue250/polling-system" target="_blank">📊 Polling System</a></h3>
-  <p>Secure voting application with real-time results visualization, advanced analytics, and customizable poll creation features.</p>
+  <h3 align="left"><a href="https://github.com/Entue250/pollwave" target="_blank">📊 Polling System</a></h3>
+  <p align="left">Secure voting application with real-time results visualization, advanced analytics, and customizable poll creation features.</p>
 </div>
 
 <h2 align="center">🔗 Connect with Me</h2>
