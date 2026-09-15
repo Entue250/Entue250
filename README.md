@@ -187,15 +187,15 @@
       </a>
     </td>
     <td width="50%" align="center">
-      <a href="https://twitter.com/your-twitter" target="_blank">
-        <img src="https://img.shields.io/badge/TWITTER-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter" />
+      <a href="https://x.com/your-x" target="_blank">
+        <img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X" />
       </a>
     </td>
   </tr>
   <tr>
     <td colspan="2" align="center">
       <a href="https://your-website.com" target="_blank">
-        <img src="https://img.shields.io/badge/PORTFOLIO-FF6B00?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio" />
+        <img src="https://img.shields.io/badge/PORTFOLIO-FF7139?style=for-the-badge&logo=firefoxbrowser&logoColor=white" alt="Portfolio" />
       </a>
     </td>
   </tr>
