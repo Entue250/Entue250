@@ -63,12 +63,10 @@
 <h2 align="center">🛠️ Skills</h2>
 <hr style="width: 100%; border: 1px solid #30363d;">
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
-  
-  <!-- Frontend Section -->
-  <div style="background-color: #0f1419; border: 1px solid #30363d; border-radius: 10px; padding: 20px;">
-    <h3 style="color: #c9d1d9; margin-bottom: 15px; text-align: center;">💻 Frontend</h3>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+<table align="center" width="100%">
+  <tr>
+    <td width="50%" valign="top" align="center">
+      <h3>💻 Frontend</h3>
       <img src="https://img.shields.io/badge/REACT-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
       <img src="https://img.shields.io/badge/NEXT.JS-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
       <img src="https://img.shields.io/badge/TYPESCRIPT-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
@@ -82,13 +80,9 @@
       <img src="https://img.shields.io/badge/MATERIAL--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white" alt="Material UI" />
       <img src="https://img.shields.io/badge/ANGULAR-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular" />
       <img src="https://img.shields.io/badge/VUE.JS-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D" alt="Vue.js" />
-    </div>
-  </div>
-
-  <!-- Backend Section -->
-  <div style="background-color: #0f1419; border: 1px solid #30363d; border-radius: 10px; padding: 20px;">
-    <h3 style="color: #c9d1d9; margin-bottom: 15px; text-align: center;">⚙️ Backend</h3>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    </td>
+    <td width="50%" valign="top" align="center">
+      <h3>⚙️ Backend</h3>
       <img src="https://img.shields.io/badge/NODE.JS-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
       <img src="https://img.shields.io/badge/EXPRESS-404D59?style=for-the-badge" alt="Express.js" />
       <img src="https://img.shields.io/badge/JAVA-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
@@ -103,13 +97,11 @@
       <img src="https://img.shields.io/badge/LARAVEL-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" />
       <img src="https://img.shields.io/badge/GRAPHQL-E10098?style=for-the-badge&logo=graphql&logoColor=white" alt="GraphQL" />
       <img src="https://img.shields.io/badge/REST%20API-02569B?style=for-the-badge&logo=rest&logoColor=white" alt="REST API" />
-    </div>
-  </div>
-
-  <!-- Databases Section -->
-  <div style="background-color: #0f1419; border: 1px solid #30363d; border-radius: 10px; padding: 20px;">
-    <h3 style="color: #c9d1d9; margin-bottom: 15px; text-align: center;">🗄️ Databases</h3>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top" align="center">
+      <h3>🗄️ Databases</h3>
       <img src="https://img.shields.io/badge/MYSQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
       <img src="https://img.shields.io/badge/POSTGRESQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
       <img src="https://img.shields.io/badge/MONGODB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
@@ -119,13 +111,9 @@
       <img src="https://img.shields.io/badge/FIREBASE-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
       <img src="https://img.shields.io/badge/AMAZON%20DYNAMODB-4053D6?style=for-the-badge&logo=Amazon%20DynamoDB&logoColor=white" alt="Amazon DynamoDB" />
       <img src="https://img.shields.io/badge/SQLITE-07405E?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
-    </div>
-  </div>
-
-  <!-- DevOps & Tools Section -->
-  <div style="background-color: #0f1419; border: 1px solid #30363d; border-radius: 10px; padding: 20px;">
-    <h3 style="color: #c9d1d9; margin-bottom: 15px; text-align: center;">🛠️ DevOps & Tools</h3>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    </td>
+    <td width="50%" valign="top" align="center">
+      <h3>🛠️ DevOps & Tools</h3>
       <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" alt="AWS" />
       <img src="https://img.shields.io/badge/DOCKER-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
       <img src="https://img.shields.io/badge/GIT-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
@@ -140,10 +128,9 @@
       <img src="https://img.shields.io/badge/AZURE-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white" alt="Azure" />
       <img src="https://img.shields.io/badge/GOOGLE%20CLOUD-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Google Cloud" />
       <img src="https://img.shields.io/badge/GITHUB%20ACTIONS-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="GitHub Actions" />
-    </div>
-  </div>
-
-</div>
+    </td>
+  </tr>
+</table>
 
 <h2 align="center">🏆 Highlighted Projects</h2>
 <hr style="width: 100%; border: 1px solid #30363d;">
