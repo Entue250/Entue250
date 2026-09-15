@@ -227,20 +227,20 @@ jobs:
             let reposChecked = 0;
             const currentYear = new Date().getFullYear();
 
-            for (const repo of repos.slice(0, 30)) { // Check top 30 repos
+            for (const repo of repos) {
               try {
-                const commits = await apiRequest(`/repos/${user.login}/${repo.name}/commits?author=${user.login}&since=${currentYear}-01-01T00:00:00Z&per_page=100`);
-                
+                const commits = await apiRequest(`/repos/${repo.full_name}/commits?author=${user.login}&since=${currentYear}-01-01T00:00:00Z&per_page=100`);
+
                 if (commits && Array.isArray(commits)) {
                   totalCommits += commits.length;
-                  console.log(`📝 ${repo.name}: ${commits.length} commits (${repo.private ? 'private' : 'public'})`);
+                  console.log(`📝 ${repo.full_name}: ${commits.length} commits (${repo.private ? 'private' : 'public'})`);
                 }
                 reposChecked++;
-                
+
                 // Rate limiting delay
                 await new Promise(resolve => setTimeout(resolve, 100));
               } catch (error) {
-                console.log(`⚠️  Skipped ${repo.name}: ${error.message}`);
+                console.log(`⚠️  Skipped ${repo.full_name}: ${error.message}`);
               }
             }
 
