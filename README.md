@@ -60,6 +60,12 @@
   <img src="https://github-profile-trophy.vercel.app/?username=Entue250&theme=radical&no-frame=true&no-bg=false&margin-w=4&margin-h=15&column=7&row=2&title=Commit,Followers,Stars,Repositories,Issues,PullRequest,Reviews&cache_bust=1789441014762" alt="GitHub Trophies" />
 </div>
 
+<!-- GitHub Achievements -->
+<div align="center" style="margin: 20px 0;">
+  <h3 style="color: #f75c7e;">🏅 Achievements</h3>
+  <img src="./github-achievements.svg" alt="GitHub Achievements" />
+</div>
+
 <h2 align="center">🛠️ Skills</h2>
 <hr style="width: 100%; border: 1px solid #30363d;">
 
