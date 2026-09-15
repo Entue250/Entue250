@@ -46,12 +46,19 @@ async function getCommitStats() {
 
     for (const repo of repos) {
       try {
-        const commits = await apiRequest(`/repos/${repo.full_name}/commits?author=${user.login}&since=${currentYear}-01-01T00:00:00Z&per_page=100`);
-
-        if (commits && Array.isArray(commits)) {
-          totalCommits += commits.length;
-          console.log(`📝 ${repo.full_name}: ${commits.length} commits (${repo.private ? 'private' : 'public'})`);
+        let repoCommits = 0;
+        let page = 1;
+        while (true) {
+          const commits = await apiRequest(`/repos/${repo.full_name}/commits?author=${user.login}&since=${currentYear}-01-01T00:00:00Z&per_page=100&page=${page}`);
+          if (!commits || !Array.isArray(commits) || commits.length === 0) break;
+          repoCommits += commits.length;
+          if (commits.length < 100) break;
+          page++;
+          await new Promise(resolve => setTimeout(resolve, 100));
         }
+
+        totalCommits += repoCommits;
+        console.log(`📝 ${repo.full_name}: ${repoCommits} commits (${repo.private ? 'private' : 'public'})`);
         reposChecked++;
 
         // Rate limiting delay
