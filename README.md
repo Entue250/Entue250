@@ -167,41 +167,36 @@
 <h2 align="center">🔗 Connect with Me</h2>
 <hr style="width: 100%; border: 1px solid #30363d;">
 
-<table align="center" style="border-collapse: separate; border-spacing: 10px; background: none; border: none;">
+<table align="center" width="100%">
   <tr>
-    <td style="text-align: center; background-color: #333; padding: 10px; border-radius: 5px;">
-      <strong style="color: white;">LINKEDIN</strong>
+    <td width="50%" align="center">
+      <a href="https://linkedin.com/in/your-linkedin" target="_blank">
+        <img src="https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
     </td>
-    <td style="text-align: center; background-color: #0A66C2; padding: 10px; border-radius: 5px;">
-      <a href="https://linkedin.com/in/your-linkedin" target="_blank" style="color: white; text-decoration: none; font-weight: bold;">CONNECT</a>
-    </td>
-    <td style="text-align: center; background-color: #333; padding: 10px; border-radius: 5px;">
-      <strong style="color: white;">EMAIL</strong>
-    </td>
-    <td style="text-align: center; background-color: #EA4335; padding: 10px; border-radius: 5px;">
-      <a href="mailto:your-email@example.com" style="color: white; text-decoration: none; font-weight: bold;">CONTACT</a>
+    <td width="50%" align="center">
+      <a href="mailto:your-email@example.com">
+        <img src="https://img.shields.io/badge/EMAIL-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+      </a>
     </td>
   </tr>
   <tr>
-    <td style="text-align: center; background-color: #333; padding: 10px; border-radius: 5px;">
-      <strong style="color: white;">INSTAGRAM</strong>
+    <td width="50%" align="center">
+      <a href="https://instagram.com/your-instagram" target="_blank">
+        <img src="https://img.shields.io/badge/INSTAGRAM-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
+      </a>
     </td>
-    <td style="text-align: center; background-color: #E4405F; padding: 10px; border-radius: 5px;">
-      <a href="https://instagram.com/your-instagram" target="_blank" style="color: white; text-decoration: none; font-weight: bold;">FOLLOW</a>
-    </td>
-    <td style="text-align: center; background-color: #333; padding: 10px; border-radius: 5px;">
-      <strong style="color: white;">TWITTER</strong>
-    </td>
-    <td style="text-align: center; background-color: #1DA1F2; padding: 10px; border-radius: 5px;">
-      <a href="https://twitter.com/your-twitter" target="_blank" style="color: white; text-decoration: none; font-weight: bold;">FOLLOW</a>
+    <td width="50%" align="center">
+      <a href="https://twitter.com/your-twitter" target="_blank">
+        <img src="https://img.shields.io/badge/TWITTER-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter" />
+      </a>
     </td>
   </tr>
   <tr>
-    <td style="text-align: center; background-color: #333; padding: 10px; border-radius: 5px;">
-      <strong style="color: white;">PORTFOLIO</strong>
-    </td>
-    <td style="text-align: center; background-color: #FF6B00; padding: 10px; border-radius: 5px;">
-      <a href="https://your-website.com" target="_blank" style="color: white; text-decoration: none; font-weight: bold;">VISIT</a>
+    <td colspan="2" align="center">
+      <a href="https://your-website.com" target="_blank">
+        <img src="https://img.shields.io/badge/PORTFOLIO-FF6B00?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio" />
+      </a>
     </td>
   </tr>
 </table>
